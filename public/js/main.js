@@ -24,14 +24,16 @@ const addAlert = (alert) =>{
     newDivAlert.classList.add("alert");
     newDivAlert.innerText = alert;
     infotArea.appendChild(newDivAlert);
+    infotArea.scrollTop = infotArea.scrollHeight;   
 }
 
 form.addEventListener('submit', (e) =>{
     e.preventDefault()
     const msg = e.target.message.value;
-    if(!msg) return
-    socket.emit('chat', {msg:msg, username:username, room: room});
+    if(!msg.trim()) return
+    socket.emit('chat', {msg:msg.trim(), username:username, room: room});
     e.target.message.value = '';
+
 })
 
 const addMessage = msg =>{
